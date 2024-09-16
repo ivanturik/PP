@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSFiler.API", "TSFiler.API\TSFiler.API.csproj", "{6ADC6212-C971-4D9E-9116-2FE50D547BA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSFiler.API", "TSFiler.API\TSFiler.API.csproj", "{6ADC6212-C971-4D9E-9116-2FE50D547BA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSFiler.BusinessLogic", "TSFiler.BusinessLogic\TSFiler.BusinessLogic.csproj", "{7BA46A9E-3A80-4FFB-A706-FC5BA8747FEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSFiler.Common", "TSFiler.Common\TSFiler.Common.csproj", "{8668E221-ECB2-43EA-93BC-581495129C01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{6ADC6212-C971-4D9E-9116-2FE50D547BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ADC6212-C971-4D9E-9116-2FE50D547BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ADC6212-C971-4D9E-9116-2FE50D547BA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BA46A9E-3A80-4FFB-A706-FC5BA8747FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BA46A9E-3A80-4FFB-A706-FC5BA8747FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BA46A9E-3A80-4FFB-A706-FC5BA8747FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BA46A9E-3A80-4FFB-A706-FC5BA8747FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8668E221-ECB2-43EA-93BC-581495129C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8668E221-ECB2-43EA-93BC-581495129C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8668E221-ECB2-43EA-93BC-581495129C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8668E221-ECB2-43EA-93BC-581495129C01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
