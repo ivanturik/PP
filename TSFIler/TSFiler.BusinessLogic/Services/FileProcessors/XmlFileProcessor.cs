@@ -11,15 +11,15 @@ public class XmlFileProcessor : IFileProcessor
         return fileType == FileType.Xml;
     }
 
-    public string ReadFile(Stream fileStream)
+    public async Task<string> ReadFileAsync(Stream fileStream)
     {
         using var reader = new StreamReader(fileStream);
-        return reader.ReadToEnd();
+        return await reader.ReadToEndAsync();
     }
 
-    public void WriteFile(Stream outputStream, string content)
+    public async Task WriteFileAsync(Stream outputStream, string content)
     {
-        XDocument xmlDocument = XDocument.Parse(content);
-        xmlDocument.Save(outputStream);
+        var xmlDocument = XDocument.Parse(content);
+        await Task.Run(() => xmlDocument.Save(outputStream));
     }
 }

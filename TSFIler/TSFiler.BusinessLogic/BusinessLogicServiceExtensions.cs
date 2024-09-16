@@ -14,12 +14,9 @@ public static class BusinessLogicServicesExtensions
         services.AddScoped<IFileProcessor, PlainTextFileProcessor>();
         services.AddScoped<IFileProcessor, JsonFileProcessor>();
         services.AddScoped<IFileProcessor, XmlFileProcessor>();
-                    
+
         services.AddScoped<IDataProcessor, BasicDataProcessor>();
         services.AddScoped<IDataProcessor, RegexDataProcessor>();
-
-        //services.AddTransient<ICompressionService, ZipCompressionService>();
-        //services.AddTransient<IEncryptionService, AesEncryptionService>();
 
         services.AddScoped<FileService>();
         return services;

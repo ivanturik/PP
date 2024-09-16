@@ -26,16 +26,7 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, "Exception occurred: {Message}", exception.Message);
-
-            var problemDetails = new ProblemDetails
-            {
-                Status = StatusCodes.Status500InternalServerError,
-                Title = $"Server Error: {exception.Message}"
-            };
-
-            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            await context.Response.WriteAsJsonAsync(problemDetails);
+            await HandleExceptionAsync(context, exception, StatusCodes.Status500InternalServerError);
         }
     }
 
@@ -50,6 +41,7 @@ public class ExceptionHandlingMiddleware
         };
 
         context.Response.StatusCode = statusCode;
+        context.Response.ContentType = "application/json";
         await context.Response.WriteAsJsonAsync(problemDetails);
     }
 }

@@ -10,16 +10,16 @@ public class PlainTextFileProcessor : IFileProcessor
         return fileType == FileType.Txt;
     }
 
-    public string ReadFile(Stream fileStream)
+    public async Task<string> ReadFileAsync(Stream fileStream)
     {
         using var reader = new StreamReader(fileStream);
-        return reader.ReadToEnd();
+        return await reader.ReadToEndAsync();
     }
 
-    public void WriteFile(Stream outputStream, string content)
+    public async Task WriteFileAsync(Stream outputStream, string content)
     {
         using var writer = new StreamWriter(outputStream);
-        writer.Write(content);
-        writer.Flush();
+        await writer.WriteAsync(content);
+        await writer.FlushAsync();
     }
 }

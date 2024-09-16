@@ -17,7 +17,7 @@ public class FileController : ControllerBase
     }
 
     [HttpPost("process")]
-    public IActionResult ProcessFile([FromQuery] string outputFileName, [FromQuery] FileType FileType, [FromQuery] ProcessType ProcessType, IFormFile file)
+    public async Task<IActionResult> ProcessFile([FromQuery] string outputFileName, [FromQuery] FileType FileType, [FromQuery] ProcessType ProcessType, IFormFile file)
     {
         if (file == null || file.Length == 0)
         {
@@ -34,7 +34,7 @@ public class FileController : ControllerBase
         using var inputStream = file.OpenReadStream();
         using var outputStream = new MemoryStream();
 
-        _fileService.ProcessFile(fileInfo, inputStream, outputStream);
+        await _fileService.ProcessFileAsync(fileInfo, inputStream, outputStream);
 
         var mimeType = fileInfo.FileType switch
         {

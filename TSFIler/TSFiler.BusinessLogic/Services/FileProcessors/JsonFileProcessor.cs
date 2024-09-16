@@ -11,22 +11,22 @@ public class JsonFileProcessor : IFileProcessor
         return fileType == FileType.Json;
     }
 
-    public string ReadFile(Stream fileStream)
+    public async Task<string> ReadFileAsync(Stream fileStream)
     {
         using var reader = new StreamReader(fileStream);
-        return reader.ReadToEnd();
+        return await reader.ReadToEndAsync();
     }
 
-    public void WriteFile(Stream outputStream, string content)
+    public async Task WriteFileAsync(Stream outputStream, string content)
     {
-        var jsonObject = JsonSerializer.Deserialize<object>(content);
+        var jsonObject = JsonSerializer.Deserialize<JsonElement>(content);
         var jsonFormatted = JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions
         {
             WriteIndented = true
         });
 
         using var writer = new StreamWriter(outputStream);
-        writer.Write(jsonFormatted);
-        writer.Flush();
+        await writer.WriteAsync(jsonFormatted);
+        await writer.FlushAsync();
     }
 }

@@ -27,7 +27,7 @@ public class BasicDataProcessor : IDataProcessor
                     "+" => num1 + num2,
                     "-" => num1 - num2,
                     "*" => num1 * num2,
-                    "/" => num1 / num2,
+                    "/" when num2 != 0 => num1 / num2,
                     _ => 0
                 };
 

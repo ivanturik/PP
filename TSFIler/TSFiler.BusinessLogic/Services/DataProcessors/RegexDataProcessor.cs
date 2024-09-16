@@ -6,11 +6,11 @@ namespace TSFiler.BusinessLogic.Services.DataProcessors;
 
 public class RegexDataProcessor : IDataProcessor
 {
-
     public bool SupportsProcessType(ProcessType processType)
     {
         return processType == ProcessType.Regex;
     }
+
     public string ProcessData(string input)
     {
         string pattern = @"(\d+)([+\-*/])(\d+)";
@@ -25,7 +25,7 @@ public class RegexDataProcessor : IDataProcessor
                 "+" => num1 + num2,
                 "-" => num1 - num2,
                 "*" => num1 * num2,
-                "/" => num1 / num2,
+                "/" when num2 != 0 => num1 / num2,
                 _ => 0
             };
 

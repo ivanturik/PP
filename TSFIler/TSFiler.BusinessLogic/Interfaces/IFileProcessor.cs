@@ -5,6 +5,6 @@ namespace TSFiler.BusinessLogic.Interfaces;
 public interface IFileProcessor
 {
     bool SupportsFileType(FileType fileType);
-    string ReadFile(Stream fileStream);
-    void WriteFile(Stream outputStream, string content);
+    Task<string> ReadFileAsync(Stream fileStream);
+    Task WriteFileAsync(Stream outputStream, string content);
 }
