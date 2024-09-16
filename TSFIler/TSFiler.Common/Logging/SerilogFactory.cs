@@ -10,9 +10,9 @@ public static class SerilogFactory
     public static SerilogLoggerFactory InitLogging()
     {
         var executingDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-        var logPath = Path.Combine(executingDir, "logs", "verbose.log");
+        var logPath = Path.Combine(executingDir, "logs", "ts-filer.log");
         var logger = new LoggerConfiguration()
-            .MinimumLevel.Warning()
+            .MinimumLevel.Information()
             .WriteTo.File(logPath,
                 outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message}{NewLine}{Exception}")
             .WriteTo.Console(LogEventLevel.Information,

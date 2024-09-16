@@ -14,6 +14,7 @@ public static class ApplicationServiceExtensions
             loggingBuilder.AddSerilog();
         });
 
+        services.AddSingleton<ILoggerFactory>(_ => SerilogFactory.InitLogging());
         services.ConfigureBusinessLogicServices(configuration);
         return services;
     }

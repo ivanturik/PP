@@ -9,6 +9,17 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAllOrigins", builder =>
+            {
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+        });
+
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -23,6 +34,7 @@ public class Program
         }
 
         app.UseMiddleware<ExceptionHandlingMiddleware>();
+        app.UseCors("AllowAllOrigins");
         app.UseAuthorization();
         app.MapControllers();
 

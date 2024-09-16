@@ -10,40 +10,46 @@ namespace TSFiler.API.Controllers;
 public class FileController : ControllerBase
 {
     private readonly FileService _fileService;
+    private readonly ILogger<FileController> _logger;
 
-    public FileController(FileService fileService)
+    public FileController(FileService fileService, ILogger<FileController> logger)
     {
         _fileService = fileService;
+        _logger = logger;
     }
 
     [HttpPost("process")]
-    public async Task<IActionResult> ProcessFile([FromQuery] string outputFileName, [FromQuery] FileType FileType, [FromQuery] ProcessType ProcessType, IFormFile file)
+    public async Task<IActionResult> ProcessFile([FromForm] string outputFileName, [FromForm] FileType FileType, [FromForm] ProcessType ProcessType, [FromForm] IFormFile file)
     {
-        if (file == null || file.Length == 0)
-        {
-            return BadRequest("Файл не был загружен.");
-        }
 
-        FileInfoModel fileInfo = new FileInfoModel
-        {
-            OutputFileName = outputFileName,
-            FileType = FileType,
-            ProcessType = ProcessType,
-        };
+        _logger.LogInformation("Received file: {FileName}, OutputFileName: {OutputFileName}, FileType: {FileType}, ProcessType: {ProcessType}",
+        file.FileName, outputFileName, FileType, ProcessType);
 
-        using var inputStream = file.OpenReadStream();
-        using var outputStream = new MemoryStream();
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("Файл не был загружен.");
+            }
 
-        await _fileService.ProcessFileAsync(fileInfo, inputStream, outputStream);
+            FileInfoModel fileInfo = new FileInfoModel
+            {
+                OutputFileName = outputFileName,
+                FileType = FileType,
+                ProcessType = ProcessType,
+            };
 
-        var mimeType = fileInfo.FileType switch
-        {
-            FileType.Json => "application/json",
-            FileType.Xml => "application/xml",
-            FileType.Yaml => "application/x-yaml",
-            _ => "text/plain"
-        };
+            using var inputStream = file.OpenReadStream();
+            using var outputStream = new MemoryStream();
 
-        return File(outputStream.ToArray(), mimeType, $"{fileInfo.OutputFileName}.{fileInfo.FileType.ToString().ToLower()}");
+            await _fileService.ProcessFileAsync(fileInfo, inputStream, outputStream);
+
+            var mimeType = fileInfo.FileType switch
+            {
+                FileType.Json => "application/json",
+                FileType.Xml => "application/xml",
+                FileType.Yaml => "application/x-yaml",
+                _ => "text/plain"
+            };
+
+            return File(outputStream.ToArray(), mimeType, $"{fileInfo.OutputFileName}.{fileInfo.FileType.ToString().ToLower()}");
     }
 }
