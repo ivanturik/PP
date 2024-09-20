@@ -19,7 +19,7 @@ public class FileController : ControllerBase
     }
 
     [HttpPost("process")]
-    public async Task<IActionResult> ProcessFile([FromForm] string outputFileName, [FromForm] FileType FileType, [FromForm] ProcessType ProcessType, [FromForm] IFormFile file)
+    public async Task<IActionResult> ProcessFile([FromForm] string outputFileName, [FromForm] FileType FileType, [FromForm] ProcessType ProcessType,[FromForm] IFormFile file)
     {
 
         _logger.LogInformation("Received file: {FileName}, OutputFileName: {OutputFileName}, FileType: {FileType}, ProcessType: {ProcessType}",
