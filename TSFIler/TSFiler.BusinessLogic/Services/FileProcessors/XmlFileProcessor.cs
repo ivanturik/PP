@@ -14,7 +14,8 @@ public class XmlFileProcessor : IFileProcessor
     public async Task<string> ReadFileAsync(Stream fileStream)
     {
         using var reader = new StreamReader(fileStream);
-        return await reader.ReadToEndAsync();
+        var fileData = await reader.ReadToEndAsync();
+        return fileData;
     }
 
     public async Task WriteFileAsync(Stream outputStream, string content)
