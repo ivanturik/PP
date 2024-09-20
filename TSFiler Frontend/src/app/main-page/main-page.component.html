@@ -1,0 +1,38 @@
+<div class="main-container">
+    <h1 class="intro-title">Добро пожаловать в TS-Filer!</h1>
+    <p class="intro-text">Загрузите ваш файл, выберите формат и способ обработки, и получите результат в один клик.</p>
+  
+    <form (ngSubmit)="onSubmit()" #fileForm="ngForm">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Формат файла</mat-label>
+          <mat-select [(ngModel)]="selectedFormat" name="fileFormat" required>
+            <mat-option value="1">TXT</mat-option>
+            <mat-option value="2">JSON</mat-option>
+            <mat-option value="3">XML</mat-option>
+            <mat-option value="4">YAML</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Тип обработки</mat-label>
+          <mat-select [(ngModel)]="selectedProcessor" name="processor" required>
+            <mat-option value="1">Обычный</mat-option>
+            <mat-option value="2">С помощью регулярных выражений</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <div class="form-group file-upload">
+        <input type="file" id="fileInput" (change)="onFileChange($event)" required />
+        <label for="fileInput">
+          <mat-icon>attach_file</mat-icon>
+          <span>{{ fileName || 'Выберите файл для загрузки' }}</span>
+        </label>
+      </div>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="!file || !selectedFormat || !selectedProcessor">Отправить</button>
+    </form>
+  </div>
