@@ -1,16 +1,10 @@
 ﻿using System.Text.Json;
-using TSFiler.BusinessLogic.Interfaces;
-using TSFiler.Common.Enums;
+using TSFiler.BusinessLogic.Services.Interfaces;
 
 namespace TSFiler.BusinessLogic.Services.FileProcessors;
 
 public class JsonFileProcessor : IFileProcessor
 {
-    public bool SupportsFileType(FileType fileType)
-    {
-        return fileType == FileType.Json;
-    }
-
     public async Task<string> ReadFileAsync(Stream fileStream)
     {
         using var reader = new StreamReader(fileStream);

@@ -1,16 +1,10 @@
 ﻿using System.Xml.Linq;
-using TSFiler.BusinessLogic.Interfaces;
-using TSFiler.Common.Enums;
+using TSFiler.BusinessLogic.Services.Interfaces;
 
 namespace TSFiler.BusinessLogic.Services.FileProcessors;
 
 public class XmlFileProcessor : IFileProcessor
 {
-    public bool SupportsFileType(FileType fileType)
-    {
-        return fileType == FileType.Xml;
-    }
-
     public async Task<string> ReadFileAsync(Stream fileStream)
     {
         using var reader = new StreamReader(fileStream);

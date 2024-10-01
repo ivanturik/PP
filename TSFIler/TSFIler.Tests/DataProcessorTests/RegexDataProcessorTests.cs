@@ -1,5 +1,4 @@
 using TSFiler.BusinessLogic.Services.DataProcessors;
-using TSFiler.Common.Enums;
 
 namespace TSFiler.Tests.DataProcessorTests;
 
@@ -10,26 +9,6 @@ public class RegexDataProcessorTests
     public RegexDataProcessorTests()
     {
         _processor = new RegexDataProcessor();
-    }
-
-    [Fact]
-    public void SupportsProcessType_ProcessTypeIsRegex_ReturnsTrue()
-    {
-        var processType = ProcessType.Regex;
-
-        var result = _processor.SupportsProcessType(processType);
-
-        Assert.True(result);
-    }
-
-    [Fact]
-    public void SupportsProcessType_ProcessTypeIsNotRegex_ReturnsFalse()
-    {
-        var processType = ProcessType.Default;
-
-        var result = _processor.SupportsProcessType(processType);
-
-        Assert.False(result);
     }
 
     [Theory]

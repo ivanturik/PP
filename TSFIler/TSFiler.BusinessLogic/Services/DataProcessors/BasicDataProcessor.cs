@@ -1,45 +1,32 @@
-﻿using TSFiler.BusinessLogic.Interfaces;
-using TSFiler.Common.Enums;
+﻿using System.Data;
+using System.Text.RegularExpressions;
+using TSFiler.BusinessLogic.Services.Interfaces;
 
 namespace TSFiler.BusinessLogic.Services.DataProcessors;
 
 public class BasicDataProcessor : IDataProcessor
 {
-    public bool SupportsProcessType(ProcessType processType)
+    public string ProcessData(string data)
     {
-        return processType == ProcessType.Default;
+        return EvaluateExpressions(data);
     }
 
-    public string ProcessData(string input)
+    private string EvaluateExpressions(string input)
     {
-        var tokens = input.Split(' ');
-        var result = new List<string>();
-
-        for (int i = 0; i < tokens.Length; i++)
+        var output = Regex.Replace(input, @"\d+(\s*[\+\-\*\/]\s*\d+)+", match =>
         {
-            if (int.TryParse(tokens[i], out int num1) &&
-                i + 2 < tokens.Length &&
-                int.TryParse(tokens[i + 2], out int num2))
+            try
             {
-                string operation = tokens[i + 1];
-                int operationResult = operation switch
-                {
-                    "+" => num1 + num2,
-                    "-" => num1 - num2,
-                    "*" => num1 * num2,
-                    "/" when num2 != 0 => num1 / num2,
-                    _ => 0
-                };
-
-                result.Add(operationResult.ToString());
-                i += 2;
+                var expression = match.Value;
+                var result = new DataTable().Compute(expression, null);
+                return result.ToString();
             }
-            else
+            catch
             {
-                result.Add(tokens[i]);
+                return match.Value;
             }
-        }
+        });
 
-        return string.Join(' ', result);
+        return output;
     }
 }

@@ -1,9 +1,8 @@
 ﻿using TSFiler.Common.Enums;
 
-namespace TSFiler.BusinessLogic.Interfaces;
+namespace TSFiler.BusinessLogic.Services.Interfaces;
 
 public interface IDataProcessor
 {
-    bool SupportsProcessType(ProcessType processType);
     string ProcessData(string input);
 }
