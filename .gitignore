@@ -483,4 +483,45 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 
+# Compiled output
+/TSFiler Frontend/dist
+/TSFiler Frontend/tmp
+/TSFiler Frontend/out-tsc
+/TSFiler Frontend/bazel-out
+
+# Node
+/TSFiler Frontend/node_modules
+/TSFiler Frontend/npm-debug.log
+/TSFiler Frontend/yarn-error.log
+
+# IDEs and editors
+/TSFiler Frontend/.idea/
+/TSFiler Frontend/.project
+/TSFiler Frontend/.classpath
+/TSFiler Frontend/.c9/
+/TSFiler Frontend/*.launch
+/TSFiler Frontend/.settings/
+/TSFiler Frontend/*.sublime-workspace
+
+# Visual Studio Code
+/TSFiler Frontend/.vscode/*
+!/TSFiler Frontend/.vscode/settings.json
+!/TSFiler Frontend/.vscode/tasks.json
+!/TSFiler Frontend/.vscode/launch.json
+!/TSFiler Frontend/.vscode/extensions.json
+/TSFiler Frontend/.history/*
+
+# Miscellaneous
+/TSFiler Frontend/.angular/cache
+/TSFiler Frontend/.sass-cache/
+/TSFiler Frontend/connect.lock
+/TSFiler Frontend/coverage
+/TSFiler Frontend/libpeerconnection.log
+/TSFiler Frontend/testem.log
+/TSFiler Frontend/typings
+
+# System files
+.DS_Store
+Thumbs.db
+
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
