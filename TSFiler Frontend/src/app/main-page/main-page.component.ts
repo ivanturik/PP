@@ -25,6 +25,7 @@ export class MainPageComponent {
   selectedProcessor: string | null = null;
   file: File | null = null;
   fileName: string = '';
+  outputFileName: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -41,14 +42,18 @@ export class MainPageComponent {
   }
 
   onSubmit() {
-    if (this.file && this.selectedFormat && this.selectedProcessor) {
+    if (this.file && this.selectedFormat && this.selectedProcessor && this.outputFileName) {
+      const params = new URLSearchParams();
+      params.append('outputFileName', this.outputFileName);
+      params.append('fileType', this.selectedFormat);
+      params.append('processType', this.selectedProcessor);
+  
+      const url = `http://localhost:5144/file/process?${params.toString()}`;
+  
       const formData = new FormData();
       formData.append('file', this.file);
-      formData.append('outputFileName', 'output');
-      formData.append('FileType', this.selectedFormat);
-      formData.append('ProcessType', this.selectedProcessor);
-
-      this.http.post('http://localhost:5144/file/process', formData, { responseType: 'blob' })
+  
+      this.http.post(url, formData, { responseType: 'blob' })
         .subscribe(response => {
           this.downloadFile(response, `output.${this.getFileExtension()}`);
         }, error => {
