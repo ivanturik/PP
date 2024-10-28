@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'main-page',
@@ -14,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     FormsModule,
     HttpClientModule,
+    MatInputModule,
     MatSelectModule,
     MatIconModule,
     MatFormFieldModule,
@@ -43,19 +45,19 @@ export class MainPageComponent {
 
   onSubmit() {
     if (this.file && this.selectedFormat && this.selectedProcessor && this.outputFileName) {
-      const params = new URLSearchParams();
-      params.append('outputFileName', this.outputFileName);
-      params.append('fileType', this.selectedFormat);
-      params.append('processType', this.selectedProcessor);
-  
-      const url = `http://localhost:5144/file/process?${params.toString()}`;
-  
+      const params = new HttpParams()
+        .set('outputFileName', this.outputFileName)
+        .set('fileType', this.selectedFormat)
+        .set('processType', this.selectedProcessor);
+
+      const url = `http://localhost:5144/file/process`;
+
       const formData = new FormData();
       formData.append('file', this.file);
-  
-      this.http.post(url, formData, { responseType: 'blob' })
+
+      this.http.post(url, formData, { params: params, responseType: 'blob' })
         .subscribe(response => {
-          this.downloadFile(response, `output.${this.getFileExtension()}`);
+          this.downloadFile(response, `${this.outputFileName}.${this.getFileExtension()}`);
         }, error => {
           console.error('Ошибка при обработке файла:', error);
         });
