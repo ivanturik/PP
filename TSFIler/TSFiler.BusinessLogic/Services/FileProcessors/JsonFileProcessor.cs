@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Encodings.Web;
 using TSFiler.BusinessLogic.Services.Interfaces;
 
 namespace TSFiler.BusinessLogic.Services.FileProcessors;
@@ -17,7 +19,8 @@ public class JsonFileProcessor : IFileProcessor
         var jsonObject = JsonSerializer.Deserialize<JsonElement>(content);
         var jsonFormatted = JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions
         {
-            WriteIndented = true
+            WriteIndented = true,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         });
 
         using var writer = new StreamWriter(outputStream);
