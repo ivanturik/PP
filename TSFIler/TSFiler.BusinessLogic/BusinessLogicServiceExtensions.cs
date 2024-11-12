@@ -19,6 +19,7 @@ public static class BusinessLogicServicesExtensions
 
         services.AddTransient<BasicDataProcessor>();
         services.AddTransient<RegexDataProcessor>();
+        services.AddTransient<LibDataProcessor>();
 
         services.AddSingleton<IFileProcessorFactory, FileProcessorFactory>();
         services.AddSingleton<IDataProcessorFactory, DataProcessorFactory>();
