@@ -3,5 +3,6 @@
 public enum ProcessType
 {
     Default = 1,
-    Regex = 2
+    Regex = 2,
+    Lib = 3
 }

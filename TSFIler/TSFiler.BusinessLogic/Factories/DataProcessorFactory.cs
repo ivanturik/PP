@@ -21,6 +21,7 @@ public class DataProcessorFactory : IDataProcessorFactory
         {
             ProcessType.Default => _serviceProvider.GetRequiredService<BasicDataProcessor>(),
             ProcessType.Regex => _serviceProvider.GetRequiredService<RegexDataProcessor>(),
+            ProcessType.Lib => _serviceProvider.GetRequiredService<LibDataProcessor>(),
             _ => throw new NotSupportedException($"Обработчик данных для {processType} не найден.")
         };
     }
