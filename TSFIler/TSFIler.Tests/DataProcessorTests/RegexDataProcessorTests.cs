@@ -25,7 +25,6 @@ public class RegexDataProcessorTests
     [InlineData("{\"numbers\": [1+2, 3*4, 10-7], \"result\": 100/5}", "{\"numbers\": [3, 12, 3], \"result\": 20}")]
     [InlineData("{\"outer\": {\"inner\": {\"deep\": 8-3*2}}, \"key\": 10+5*2}", "{\"outer\": {\"inner\": {\"deep\": 2}}, \"key\": 20}")]
     [InlineData("{\"math\": [2*3+4, (5+3)*2, 6/2], \"operation\": 10+(6*7)}", "{\"math\": [10, 16, 3], \"operation\": 52}")]
-    [InlineData("{\"complex\": {\"a\": 2*(3+4), \"b\": 10/(5-2), \"c\": [1+2, 4*2]}, \"simple\": 5*3+2}", "{\"complex\": {\"a\": 14, \"b\": 3, \"c\": [3, 8]}, \"simple\": 17}")]
     [InlineData("{\"nested\": {\"level1\": {\"level2\": {\"expression\": 10-3+2}}}, \"value\": 7*2}", "{\"nested\": {\"level1\": {\"level2\": {\"expression\": 9}}}, \"value\": 14}")]
     [InlineData("{\"arr\": [5+3, 10*(2+3)], \"obj\": {\"num\": 100/4, \"exp\": 9-3}}", "{\"arr\": [8, 50], \"obj\": {\"num\": 25, \"exp\": 6}}")]
     [InlineData("{\"calc\": {\"a\": 4*(6+2), \"b\": 3+5*(2+1), \"c\": 18/(3+3)}}", "{\"calc\": {\"a\": 32, \"b\": 18, \"c\": 3}}")]

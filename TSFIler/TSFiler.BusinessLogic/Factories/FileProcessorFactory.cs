@@ -23,7 +23,7 @@ public class FileProcessorFactory : IFileProcessorFactory
             FileType.Json => _serviceProvider.GetRequiredService<JsonFileProcessor>(),
             FileType.Xml => _serviceProvider.GetRequiredService<XmlFileProcessor>(),
             FileType.Yaml => _serviceProvider.GetRequiredService<YamlFileProcessor>(),
-            _ => throw new NotSupportedException($"Обработчик файлов для {fileType} не найден.")
+            _ => throw new NotSupportedException($"Обработчик файлов для \"{fileType}\" не найден.")
         };
     }
 }

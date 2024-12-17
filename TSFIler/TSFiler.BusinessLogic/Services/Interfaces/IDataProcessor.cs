@@ -1,6 +1,4 @@
-﻿using TSFiler.Common.Enums;
-
-namespace TSFiler.BusinessLogic.Services.Interfaces;
+﻿namespace TSFiler.BusinessLogic.Services.Interfaces;
 
 public interface IDataProcessor
 {

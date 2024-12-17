@@ -2,6 +2,7 @@
 
 public enum FileType
 {
+    None = 0,
     Txt = 1,
     Json = 2,
     Xml = 3,
