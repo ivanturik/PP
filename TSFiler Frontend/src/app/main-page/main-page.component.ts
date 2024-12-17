@@ -23,7 +23,6 @@ import { MatInputModule } from '@angular/material/input';
   ]
 })
 export class MainPageComponent {
-  selectedFormat: string | null = null;
   selectedProcessor: string | null = null;
   file: File | null = null;
   fileName: string = '';
@@ -44,10 +43,9 @@ export class MainPageComponent {
   }
 
   onSubmit() {
-    if (this.file && this.selectedFormat && this.selectedProcessor && this.outputFileName) {
+    if (this.file && this.selectedProcessor && this.outputFileName) {
       const params = new HttpParams()
         .set('outputFileName', this.outputFileName)
-        .set('fileType', this.selectedFormat)
         .set('processType', this.selectedProcessor);
 
       const url = `http://localhost:5144/file/process`;
@@ -57,20 +55,10 @@ export class MainPageComponent {
 
       this.http.post(url, formData, { params: params, responseType: 'blob' })
         .subscribe(response => {
-          this.downloadFile(response, `${this.outputFileName}.${this.getFileExtension()}`);
+          this.downloadFile(response, `${this.outputFileName}`);
         }, error => {
           console.error('Ошибка при обработке файла:', error);
         });
-    }
-  }
-
-  private getFileExtension(): string {
-    switch (this.selectedFormat) {
-      case '1': return 'txt';
-      case '2': return 'json';
-      case '3': return 'xml';
-      case '4': return 'yaml';
-      default: return 'txt';
     }
   }
 
