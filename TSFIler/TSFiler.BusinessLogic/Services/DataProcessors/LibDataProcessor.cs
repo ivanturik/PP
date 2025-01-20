@@ -28,7 +28,9 @@ namespace TSFiler.BusinessLogic.Services.DataProcessors
             {
                 var match = Regex.Match(input, pattern);
                 if (!match.Success)
+                {
                     break;
+                }
 
                 var inside = match.Groups[1].Value;
                 var computedInside = EvaluateSimpleExpressions(inside);
@@ -53,7 +55,9 @@ namespace TSFiler.BusinessLogic.Services.DataProcessors
                 var e = new Expression(expr);
                 var r = e.Evaluate();
                 if (r is double d && (double.IsInfinity(d) || double.IsNaN(d)))
-                    throw new DivideByZeroException();
+                {
+                    throw new DivideByZeroException("Деление на ноль обнаружено в выражении.");
+                }
                 return r.ToString();
             }
             catch

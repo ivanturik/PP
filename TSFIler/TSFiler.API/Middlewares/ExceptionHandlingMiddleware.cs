@@ -24,6 +24,10 @@ public class ExceptionHandlingMiddleware
         {
             await HandleExceptionAsync(context, exception, StatusCodes.Status400BadRequest);
         }
+        catch (DivideByZeroException exception)
+        {
+            await HandleExceptionAsync(context, exception, StatusCodes.Status400BadRequest);
+        }
         catch (Exception exception)
         {
             await HandleExceptionAsync(context, exception, StatusCodes.Status500InternalServerError);
