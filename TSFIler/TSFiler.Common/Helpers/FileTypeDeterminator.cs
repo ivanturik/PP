@@ -16,6 +16,9 @@ namespace TSFiler.Common.Helpers
                 "json" => FileType.Json,
                 "yaml" => FileType.Yaml,
                 "xml" => FileType.Xml,
+                "zip" => FileType.Zip,
+                "rar" => FileType.Rar,
+                "enc" => FileType.Enc,
                 _ => FileType.None
             };
 

@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
     <PackageReference Include="NCalcSync" Version="5.2.11" />
+    <PackageReference Include="SharpCompress" Version="0.39.0" />
     <PackageReference Include="YamlDotNet" Version="16.2.0" />
   </ItemGroup>
 

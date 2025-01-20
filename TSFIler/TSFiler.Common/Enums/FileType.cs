@@ -6,5 +6,8 @@ public enum FileType
     Txt = 1,
     Json = 2,
     Xml = 3,
-    Yaml = 4
+    Yaml = 4,
+    Zip = 5,
+    Rar = 6,
+    Enc = 7
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TSFiler.BusinessLogic.Factories.Interfaces;
 using TSFiler.BusinessLogic.Services.FileProcessors;
+using TSFiler.BusinessLogic.Services.FileProcessors.Decorators;
 using TSFiler.BusinessLogic.Services.Interfaces;
 using TSFiler.Common.Enums;
 
@@ -17,13 +18,26 @@ public class FileProcessorFactory : IFileProcessorFactory
 
     public IFileProcessor GetFileProcessor(FileType fileType)
     {
-        return fileType switch
+        switch (fileType)
         {
-            FileType.Txt => _serviceProvider.GetRequiredService<PlainTextFileProcessor>(),
-            FileType.Json => _serviceProvider.GetRequiredService<JsonFileProcessor>(),
-            FileType.Xml => _serviceProvider.GetRequiredService<XmlFileProcessor>(),
-            FileType.Yaml => _serviceProvider.GetRequiredService<YamlFileProcessor>(),
-            _ => throw new NotSupportedException($"Обработчик файлов для \"{fileType}\" не найден.")
-        };
+            case FileType.Txt:
+                return _serviceProvider.GetRequiredService<PlainTextFileProcessor>();
+            case FileType.Json:
+                return _serviceProvider.GetRequiredService<JsonFileProcessor>();
+            case FileType.Xml:
+                return _serviceProvider.GetRequiredService<XmlFileProcessor>();
+            case FileType.Yaml:
+                return _serviceProvider.GetRequiredService<YamlFileProcessor>();
+            case FileType.Zip:
+                return new ZipFileProcessorDecorator(_serviceProvider.GetRequiredService<IFileProcessorFactory>());
+            case FileType.Rar:
+                return new RarFileProcessorDecorator(_serviceProvider.GetRequiredService<IFileProcessorFactory>());
+            case FileType.Enc:
+                return new EncryptedFileProcessorDecorator(_serviceProvider.GetRequiredService<IFileProcessorFactory>());
+            default:
+                throw new NotSupportedException($"Обработчик для {fileType} не найден.");
+        }
     }
+
+
 }
