@@ -13,7 +13,7 @@ public class PlainTextFileProcessor : IFileProcessor
 
     public async Task WriteFileAsync(Stream outputStream, string content)
     {
-        using var writer = new StreamWriter(outputStream);
+        using var writer = new StreamWriter(outputStream, leaveOpen: true);
         await writer.WriteAsync(content);
         await writer.FlushAsync();
     }

@@ -22,7 +22,7 @@ public class JsonFileProcessor : IFileProcessor
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         });
 
-        using var writer = new StreamWriter(outputStream);
+        using var writer = new StreamWriter(outputStream, leaveOpen: true);
         await writer.WriteAsync(jsonFormatted);
         await writer.FlushAsync();
     }
